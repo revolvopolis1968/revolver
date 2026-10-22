@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="sv" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System</title>
+<meta name="description" content="Tokens, typografi och 23 komponenter i ett stramt, neutralt UI-system.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap">
+<link rel="stylesheet" href="design-system/tokens/tokens.css">
+<link rel="stylesheet" href="design-system/components/bundle.css">
+<link rel="stylesheet" href="site.css">
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<script src="design-system/components/bundle.js"></script>
+</head>
+<body>
+<a class="skip ui-button-default" href="#main">Hoppa till innehåll</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="top__brand content-heading-5" href="index.html">Design System</a>
+    <nav class="top__nav" aria-label="Huvudmeny" id="nav"></nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <h1 class="content-display">Ett system. Alla delar.</h1>
+      <p class="content-body">Gråskalan bär gränssnittet, djupblå ger karaktär och länkblå visar vad som går att klicka på. Tokens, typografi och komponenter på ett ställe, byggda i Inter.</p>
+      <div class="hero__actions" id="hero-actions"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2 class="content-heading-2-strong">Innehåll</h2>
+      <p class="content-body">Allt kommer från Figma-variablerna. Siffrorna nedan räknas ur tokens.json.</p>
+      <div class="grid" id="stats"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2 class="content-heading-2-strong">Komponenter i bruk</h2>
+      <p class="content-body">Några av de 23 komponenterna, renderade från samma bundle som produkten använder.</p>
+      <div class="sampler" id="sampler"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <h2 class="content-heading-2-strong">Regler att utgå från</h2>
+      <div class="grid">
+        <div class="card"><h3 class="content-heading-4">Kontrast</h3><p class="content-body">Text når 4.5:1 mot sin yta, 3:1 för 24 px och uppåt samt för ramar och fokusringar.</p></div>
+        <div class="card"><h3 class="content-heading-4">Fokus syns alltid</h3><p class="content-body">En ring på 2 px i <code>surface-focus</code> med 2 px glapp. Den tas aldrig bort.</p></div>
+        <div class="card"><h3 class="content-heading-4">Status i ord</h3><p class="content-body">Färg ensam räcker inte. Skriv statusen eller lägg till en ikon.</p></div>
+        <div class="card"><h3 class="content-heading-4">En primär knapp</h3><p class="content-body">Max en per vy. Knapptexter är verb i imperativ: Spara, Avbryt.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap content-caption">Ikoner och logotyp saknas i underlaget; platshållare används tills de levereras.</div>
+</footer>
+
+<script>
+(function () {
+  var D = window.DesignSystem, h = React.createElement;
+  var mount = function (id, node) { ReactDOM.createRoot(document.getElementById(id)).render(node); };
+
+  mount('nav', h(React.Fragment, null,
+    h(D.Link, { arrow: false, href: 'index.html', 'aria-current': 'page' }, 'Start'),
+    h(D.Link, { arrow: false, href: 'assets.html' }, 'Assets')));
+
+  mount('hero-actions', h(React.Fragment, null,
+    h(D.Button, { variant: 'secondary-ondark', size: 'large', iconRight: 'arrow-right', onClick: function () { location.href = 'assets.html'; } }, 'Visa alla assets')));
+
+  mount('sampler', h('div', { style: { display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2xl)' } },
+    h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-xl)', alignItems: 'center' } },
+      h(D.Button, null, 'Spara'), h(D.Button, { variant: 'default' }, 'Avbryt'), h(D.Button, { variant: 'secondary' }, 'Rensa'),
+      h(D.Chip, null, 'Kalmar'), h(D.CountBadge, { filled: true }, '3')),
+    h('div', { style: { display: 'grid', gap: 'var(--spacing-xl)', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))' } },
+      h(D.TextField, { label: 'Namn', helper: 'Ange för- och efternamn', placeholder: 'Mikael' }),
+      h(D.Select, { label: 'Roll', placeholder: 'Välj roll', options: ['Art director', 'UX-designer'] })),
+    h('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-3xl)' } },
+      h(D.Switch, { label: 'Aviseringar', defaultChecked: true }),
+      h(D.Checkbox, { label: 'Kom ihåg mig' }),
+      h(D.Radio, { name: 'r', label: 'Alternativ A', defaultChecked: true })),
+    h(D.Tabs, { items: ['Översikt', 'Tokens', 'Komponenter'], defaultValue: 'Översikt' }),
+    h(D.Notification, { title: 'Det finns osparade ändringar', actions: h(D.Button, { size: 'small' }, 'Spara') }, 'Spara innan du lämnar sidan.')));
+
+  fetch('design-system/tokens/tokens.json').then(function (r) { return r.json(); }).then(function (t) {
+    var styles = t.type.groups.reduce(function (n, g) { return n + g.styles.length; }, 0);
+    var items = [
+      [t.color.tokens.length, 'färger', 'Primitiver och semantiska roller.'],
+      [styles, 'textstilar', 'Content, UI, dokumentation och legacy.'],
+      [t.spacing.tokens.length + t.radius.tokens.length + t.size.tokens.length, 'mått', 'Mellanrum, padding, radier, höjder och ikonstorlekar.'],
+      [23, 'komponenter', 'Handlingar, formulär, navigation, återkoppling och innehåll.']
+    ];
+    var el = document.getElementById('stats');
+    items.forEach(function (i) {
+      var c = document.createElement('div'); c.className = 'card';
+      c.innerHTML = '<div class="stat"></div><h3 class="content-heading-4"></h3><p class="content-body"></p>';
+      c.children[0].textContent = i[0]; c.children[1].textContent = i[1]; c.children[2].textContent = i[2];
+      el.appendChild(c);
+    });
+  }).catch(function () {
+    document.getElementById('stats').textContent = 'Kunde inte läsa tokens.json. Öppna sidan via en lokal server (npx serve .).';
+  });
+})();
+</script>
+</body>
+</html>

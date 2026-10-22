@@ -1,0 +1,14 @@
+<!-- @dsCard group="Forms" height=150 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Checkbox — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h(D.Checkbox,{label:'Checkbox'}), h(D.Checkbox,{label:'Checkbox',defaultChecked:true}), h(D.Checkbox,{label:'Delvis',indeterminate:true}),
+h(D.Checkbox,{label:'Disabled',disabled:true}), h(D.Checkbox,{label:'Disabled',disabled:true,defaultChecked:true})));
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; background: var(--surface-white); }
+  .cover { position: relative; width: 960px; height: 320px; overflow: hidden; background: var(--surface-white); font-family: var(--font-sans); }
+  .text { position: absolute; left: 40px; bottom: 32px; max-width: 440px; }
+  .name { margin: 0; font-size: 120px; line-height: .95; font-weight: 700; letter-spacing: -0.02em; color: var(--font-high-emphasis-dark); }
+  .tag { margin: 16px 0 0; font-size: 14px; line-height: 20px; color: var(--font-medium-emphasis-dark); }
+  svg { position: absolute; left: 480px; top: 0; width: 480px; height: 320px; }
+  .brand { fill: var(--surface-brand); }
+  .dark { fill: var(--surface-primary-dark); }
+  .mid { fill: var(--surface-primary-1000); }
+  .link { fill: var(--surface-focus); }
+  .tint { fill: var(--surface-primary-200); }
+  .tile { fill: var(--surface-white); }
+  .tile-on { fill: var(--button-primary); }
+  .md { rx: var(--radius-heavy); }
+  .sm { rx: var(--radius-primary); }
+</style>
+</head>
+<body>
+<div class="cover">
+  <svg viewBox="0 0 480 320" aria-hidden="true">
+    <!--
+      blocks: surface-brand 224×212, surface-primary-dark 236×132, surface-primary-1000 112×64, surface-focus 108×64, surface-primary-200 band 476×120 — corners radius-heavy
+      arrangement: tall brand slab + dark slab bleeding off top/right, two small satellites, a tint band bleeding off right/bottom
+      pattern: modular tiles (geometric, dense UI with 6/12px radii) — 24px tiles at button-mini, cut by radius-primary, some merged two-wide like buttons
+      steps and radii: spacing-xl (16) gaps, button-mini (24) tile, radius-primary 6, radius-heavy 12
+    -->
+    <rect class="brand md" x="16" y="-12" width="224" height="212"/>
+    <rect class="dark md" x="256" y="-12" width="236" height="132"/>
+    <rect class="mid md" x="256" y="136" width="112" height="64"/>
+    <rect class="link md" x="384" y="136" width="108" height="64"/>
+    <rect class="tint md" x="16" y="216" width="476" height="120"/>
+    <g>
+      <rect class="tile-on sm" x="36" y="236" width="64" height="24"/>
+      <rect class="tile sm" x="116" y="236" width="24" height="24"/>
+      <rect class="tile sm" x="156" y="236" width="24" height="24"/>
+      <rect class="tile sm" x="196" y="236" width="24" height="24"/>
+      <rect class="tile sm" x="236" y="236" width="64" height="24"/>
+      <rect class="tile sm" x="316" y="236" width="24" height="24"/>
+      <rect class="tile sm" x="356" y="236" width="24" height="24"/>
+      <rect class="tile-on sm" x="396" y="236" width="24" height="24"/>
+      <rect class="tile sm" x="436" y="236" width="24" height="24"/>
+      <rect class="tile sm" x="36" y="276" width="24" height="24"/>
+      <rect class="tile sm" x="76" y="276" width="24" height="24"/>
+      <rect class="tile sm" x="116" y="276" width="64" height="24"/>
+      <rect class="tile sm" x="196" y="276" width="24" height="24"/>
+      <rect class="tile-on sm" x="236" y="276" width="24" height="24"/>
+      <rect class="tile sm" x="276" y="276" width="24" height="24"/>
+      <rect class="tile sm" x="316" y="276" width="64" height="24"/>
+      <rect class="tile sm" x="396" y="276" width="24" height="24"/>
+      <rect class="tile sm" x="436" y="276" width="24" height="24"/>
+    </g>
+  </svg>
+  <div class="text">
+    <h1 class="name">Design System</h1>
+    <p class="tag">Gråskala som bär, blått som leder.</p>
+  </div>
+</div>
+</body>
+</html>

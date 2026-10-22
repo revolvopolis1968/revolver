@@ -1,0 +1,13 @@
+<!-- @dsCard group="Feedback" height=80 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>CountBadge — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h(D.CountBadge,null,'7'), h(D.CountBadge,{filled:true},'7')));
+</script>
+</body>
+</html>

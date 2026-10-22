@@ -1,0 +1,15 @@
+<!-- @dsCard group="Forms" height=150 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Select — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h(D.Select,{label:'Label',options:['Select','Alternativ 2','Alternativ 3']}),
+h(D.Select,{options:['Select','Alternativ 2']}),
+h(D.Select,{options:['Select'],disabled:true})));
+</script>
+</body>
+</html>

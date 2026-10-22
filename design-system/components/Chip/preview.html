@@ -1,0 +1,13 @@
+<!-- @dsCard group="Forms" height=96 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Chip — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h(D.Chip,null,'Chip'), h(D.Chip,{onRemove:function(){}},'Chip'), h(D.Chip,{icon:'close',onRemove:function(){}},'Chip')));
+</script>
+</body>
+</html>

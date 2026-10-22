@@ -1,0 +1,13 @@
+<!-- @dsCard group="Forms" height=140 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>SearchField — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h('div',{style:{width:'100%'}},h(D.SearchField,{label:'Label',helper:'Hjälptext som instruerar.',chips:['Chip','Chip'],onRemoveChip:function(){},onClear:function(){},showCalendar:true}))));
+</script>
+</body>
+</html>

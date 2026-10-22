@@ -1,0 +1,20 @@
+<!-- @dsCard group="Actions" height=470 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Button — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, cap('Varianter'),
+h(D.Button,null,'Spara'), h(D.Button,{variant:'default'},'Avbryt'), h(D.Button,{variant:'secondary'},'Rensa'), h(D.Button,{variant:'brand',size:'xlarge',iconLeft:'plus-circle'},'Xlarge'), h(D.Button,{disabled:true},'Disabled'),
+cap('Storlekar'),
+h(D.Button,{size:'mini'},'Mini'), h(D.Button,{size:'small'},'Small'), h(D.Button,null,'Default'), h(D.Button,{size:'large'},'Large'), h(D.Button,{size:'xlarge'},'Xlarge'),
+cap('Ikon'),
+h(D.Button,{iconLeft:'plus-circle'},'Left icon'), h(D.Button,{iconRight:'plus-circle'},'Right icon'),
+cap('Secondary OnDark'),
+h('div',{className:'ds-demo ds-demo--dark',style:{width:'100%',borderRadius:'12px'}},h(D.Button,{variant:'secondary-ondark'},'Default'),h(D.Button,{variant:'secondary-ondark',disabled:true},'Disabled'))));
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!-- @dsCard group="Foundations" height=96 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Icon — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, ['plus-circle','chevron-down','chevron-left','arrow-right','close','check','minus','search','calendar','info','menu','star','caret-down'].map(function(n){return h(D.Icon,{key:n,name:n,size:24,title:n})})));
+</script>
+</body>
+</html>

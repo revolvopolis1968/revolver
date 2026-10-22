@@ -1,0 +1,15 @@
+<!-- @dsCard group="Forms" height=214 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>TextArea — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'24px',width:'100%'}},
+ h(D.TextArea,{label:'Meddelande',helper:'Beskriv ärendet kort.',placeholder:'Placeholder'}),
+ h(D.TextArea,{label:'Meddelande',helper:'Beskriv ärendet kort.',placeholder:'Placeholder',error:true,errorText:'Skriv minst en mening.'}))));
+</script>
+</body>
+</html>

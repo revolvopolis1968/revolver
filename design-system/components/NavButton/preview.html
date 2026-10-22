@@ -1,0 +1,13 @@
+<!-- @dsCard group="Navigation" height=130 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>NavButton — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h(D.NavButton,{icon:'menu'},'Text'), h(D.NavButton,{icon:'search'},'Text'), h(D.NavButton,{icon:'close',active:true},'Text')));
+</script>
+</body>
+</html>

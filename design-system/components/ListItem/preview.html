@@ -1,0 +1,16 @@
+<!-- @dsCard group="Navigation" height=450 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>ListItem — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h('div',{style:{width:'320px'}},
+ h(D.ListItem,null,'List item'), h(D.ListItem,{state:'hover'},'List item'), h(D.ListItem,{state:'active'},'List item'),
+ h(D.ListItem,{selected:true},'List item'), h(D.ListItem,{selected:true,disabled:true},'List item'),
+ h(D.ListItem,{checkbox:true},'List item'), h(D.ListItem,{checkbox:true,selected:true},'List item'))));
+</script>
+</body>
+</html>

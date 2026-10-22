@@ -1,0 +1,21 @@
+<!-- @dsCard group="Forms" height=520 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>TextField — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h('div',{style:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'24px',width:'100%'}},
+ h(D.TextField,{label:'Förnamn',helper:'Hjälptext som instruerar.',placeholder:'Placeholder'}),
+ h(D.TextField,{label:'Förnamn',helper:'Hjälptext som instruerar.',placeholder:'Placeholder',state:'hover'}),
+ h(D.TextField,{label:'Förnamn',helper:'Hjälptext som instruerar.',defaultValue:'Anna'}),
+ h(D.TextField,{label:'Förnamn',helper:'Hjälptext som instruerar.',defaultValue:'Anna',state:'focus'}),
+ h(D.TextField,{label:'Förnamn',helper:'Hjälptext som instruerar.',placeholder:'Placeholder',error:true,errorText:'Fyll i ditt förnamn.'}),
+ h(D.TextField,{label:'Förnamn',helper:'Hjälptext som instruerar.',placeholder:'Placeholder',disabled:true}),
+ h(D.TextField,{label:'Datum',placeholder:'ÅÅÅÅ-MM-DD',endIcon:'calendar'}),
+ h(D.TextField,{label:'Sök',placeholder:'Placeholder',startIcon:'search',type:'search'}))));
+</script>
+</body>
+</html>

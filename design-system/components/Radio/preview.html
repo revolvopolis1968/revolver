@@ -1,0 +1,13 @@
+<!-- @dsCard group="Forms" height=120 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Radio — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h(D.Radio,{label:'Radiobutton',name:'r'}), h(D.Radio,{label:'Radiobutton',name:'r',defaultChecked:true}), h(D.Radio,{label:'Disabled',disabled:true}), h(D.Radio,{label:'Disabled',disabled:true,defaultChecked:true})));
+</script>
+</body>
+</html>

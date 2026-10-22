@@ -1,0 +1,14 @@
+<!-- @dsCard group="Navigation" height=110 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>SegmentedControl — preview</title></head>
+<body>
+<div id="root" class="ds-demo"></div>
+<script>
+  var D = window.DesignSystem, h = React.createElement;
+  function cap(t) { return h('div', { className: 'ds-demo__cap', key: 'cap-' + t }, t); }
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null, h(D.SegmentedControl,{label:'Vy',items:['Left','Middle','Right']}),
+h(D.SegmentedControl,{label:'Favorit',items:[{value:'1',label:'Ett',icon:'star'},{value:'2',label:'Två',icon:'star'},{value:'3',label:'Tre',icon:'star'}]})));
+</script>
+</body>
+</html>

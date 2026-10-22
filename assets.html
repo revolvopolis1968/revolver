@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="sv" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assets – Design System</title>
+<meta name="description" content="Färger, typografi, mått, ikoner och komponenter i designsystemet.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&display=swap">
+<link rel="stylesheet" href="design-system/tokens/tokens.css">
+<link rel="stylesheet" href="design-system/components/bundle.css">
+<link rel="stylesheet" href="site.css">
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<script src="design-system/components/bundle.js"></script>
+</head>
+<body>
+<a class="skip ui-button-default" href="#main">Hoppa till innehåll</a>
+<header class="top">
+  <div class="wrap">
+    <a class="top__brand content-heading-5" href="index.html">Design System</a>
+    <nav class="top__nav" aria-label="Huvudmeny" id="nav"></nav>
+  </div>
+</header>
+<div class="sub"><div class="wrap" id="subnav"></div></div>
+
+<main id="main">
+  <div class="wrap page-head">
+    <h1 class="content-heading-1">Assets</h1>
+    <p class="content-body lead">Alla tokens, typstilar, ikoner och komponenter. Klicka på en färg för att kopiera token-namnet.</p>
+  </div>
+
+  <section class="block" id="farger"><div class="wrap">
+    <h2 class="content-heading-2-strong">Färger</h2>
+    <div class="toolbar"><div class="tb-field" id="color-search"></div><div class="content-caption" id="color-count" aria-live="polite"></div></div>
+    <div id="colors"></div>
+  </div></section>
+
+  <section class="block" id="typografi"><div class="wrap">
+    <h2 class="content-heading-2-strong">Typografi</h2>
+    <p class="content-body">Inter för all produkttext. Stilnamnet är också CSS-klassen.</p>
+    <div id="type"></div>
+  </div></section>
+
+  <section class="block" id="matt"><div class="wrap">
+    <h2 class="content-heading-2-strong">Mått</h2>
+    <div id="sizes"></div>
+  </div></section>
+
+  <section class="block" id="ikoner"><div class="wrap">
+    <h2 class="content-heading-2-strong">Ikoner</h2>
+    <div class="empty" role="note"><div><b>Platshållare.</b> Varumärkets ikonfiler finns inte i systemet än. Glyferna nedan är enkla linjeteckningar och ska bytas. Alla ikonprops tar också ett eget SVG-element.</div></div>
+    <h3 class="content-heading-4 group">Platshållarglyfer</h3>
+    <div class="icons" id="icons"></div>
+    <h3 class="content-heading-4 group">Logotyp</h3>
+    <div class="empty" role="note"><div><b>Saknas.</b> Namnet sätts i ren text i <code>content-heading-5</code> tills en logotyp laddas upp.</div></div>
+  </div></section>
+
+  <section class="block" id="komponenter"><div class="wrap">
+    <h2 class="content-heading-2-strong">Komponenter</h2>
+    <p class="content-body">24 förhandsvisningar med alla varianter och tillstånd. Riktlinjer per komponent finns i <code>design-system/components/&lt;Namn&gt;/README.md</code>.</p>
+    <div class="comps" id="comps"></div>
+  </div></section>
+</main>
+
+<footer class="foot"><div class="wrap content-caption">Källa: Figma-variabler exporterade till design-system/tokens/tokens.json.</div></footer>
+
+<script>
+(function () {
+  var D = window.DesignSystem, h = React.createElement;
+  var COMPONENTS = ["BackLink", "Breadcrumb", "Button", "Checkbox", "Chip", "CountBadge", "Cover", "Dialog", "Figure", "IconButton", "Link", "ListItem", "NavButton", "Notification", "Quote", "Radio", "SearchField", "SegmentedControl", "Select", "Switch", "Tabs", "TextArea", "TextField", "Tooltip"];
+  var ICONS = ['plus-circle','chevron-down','chevron-left','arrow-right','close','check','minus','search','calendar','info','menu','star','caret-down'];
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  var cs = getComputedStyle(document.documentElement);
+
+  /* Nav */
+  ReactDOM.createRoot($('nav')).render(h(React.Fragment, null,
+    h(D.Link, { arrow: false, href: 'index.html' }, 'Start'),
+    h(D.Link, { arrow: false, href: 'assets.html', 'aria-current': 'page' }, 'Assets')));
+  ReactDOM.createRoot($('subnav')).render(h(D.Tabs, { items: [
+      { value: 'farger', label: 'Färger' }, { value: 'typografi', label: 'Typografi' }, { value: 'matt', label: 'Mått' },
+      { value: 'ikoner', label: 'Ikoner' }, { value: 'komponenter', label: 'Komponenter' }],
+    defaultValue: 'farger', onChange: function (v) { $(v).scrollIntoView({ behavior: 'smooth' }); } }));
+
+  /* Icons */
+  ICONS.forEach(function (n) {
+    var c = el('div', 'ico'), s = el('div', 'ico__sizes');
+    [12, 16, 20, 24].forEach(function (px) { var w = el('span'); s.appendChild(w); ReactDOM.createRoot(w).render(h(D.Icon, { name: n, size: px })); });
+    c.appendChild(s); c.appendChild(el('code', null, n)); $('icons').appendChild(c);
+  });
+
+  /* Components */
+  COMPONENTS.forEach(function (n) {
+    var c = el('article', 'comp'), hd = el('header');
+    hd.appendChild(el('h3', 'content-heading-5', n));
+    var a = el('a', 'content-caption', 'Öppna'); a.href = 'preview/' + n + '.html'; a.setAttribute('aria-label', 'Öppna ' + n + ' i egen flik');
+    hd.appendChild(a); c.appendChild(hd);
+    var f = el('iframe'); f.loading = 'lazy'; f.title = n; f.src = 'preview/' + n + '.html'; c.appendChild(f);
+    $('comps').appendChild(c);
+  });
+
+  function table(cols, rows) {
+    var w = el('div', 'tscroll'), t = el('table', 'tbl'), th = el('thead'), tr = el('tr');
+    cols.forEach(function (c) { var x = el('th', 'content-caption-strong', c); x.scope = 'col'; tr.appendChild(x); });
+    th.appendChild(tr); t.appendChild(th);
+    var tb = el('tbody'); rows.forEach(function (r) { var q = el('tr'); r.forEach(function (cell) { var d = el('td', 'content-caption'); if (cell instanceof Node) d.appendChild(cell); else d.textContent = cell; q.appendChild(d); }); tb.appendChild(q); });
+    t.appendChild(tb); w.appendChild(t); return w;
+  }
+  var code = function (s) { return el('code', null, s); };
+
+  fetch('design-system/tokens/tokens.json').then(function (r) { return r.json(); }).then(function (t) {
+    /* Colors */
+    var colors = t.color.tokens;
+    var prim = /^(brand|brand-tint|primary-|link|alert$|tint-|status-[0-9a-f]{6}$)/;
+    var groups = [
+      ['Primitiver', function (n) { return prim.test(n); }],
+      ['Font', function (n) { return /^font-/.test(n); }],
+      ['Icon', function (n) { return /^icon-/.test(n); }],
+      ['Surface', function (n) { return /^surface-/.test(n); }],
+      ['Button', function (n) { return /^button-/.test(n); }],
+      ['Stroke och fokus', function (n) { return /^(stroke|focus)-/.test(n); }],
+      ['Status', function (n) { return /^status-/.test(n); }]
+    ];
+    var used = {}, sections = [];
+    groups.forEach(function (g) {
+      var list = colors.filter(function (c) { if (used[c.name]) return false; if (g[1](c.name)) { used[c.name] = 1; return true; } return false; });
+      if (list.length) sections.push({ name: g[0], list: list });
+    });
+    var rest = colors.filter(function (c) { return !used[c.name]; });
+    if (rest.length) sections.push({ name: 'Övrigt', list: rest });
+
+    var swEls = [];
+    sections.forEach(function (s) {
+      var title = el('h3', 'content-heading-4 group', s.name), grid = el('div', 'swgrid');
+      s.list.forEach(function (c) {
+        var b = el('button', 'sw'); b.type = 'button';
+        var chip = el('div', 'sw__chip'), fill = el('i'); fill.style.background = 'var(--' + c.name + ')'; chip.appendChild(fill);
+        var m = el('div', 'sw__meta');
+        m.appendChild(el('span', 'content-caption-strong sw__name', c.name));
+        var alias = /^\{/.test(c.value) ? c.value.replace(/[{}]/g, '') : null;
+        m.appendChild(el('span', 'content-caption sw__val', (alias ? alias + ' · ' : '') + cs.getPropertyValue('--' + c.name).trim()));
+        b.appendChild(chip); b.appendChild(m);
+        b.title = c.usage || '';
+        b.addEventListener('click', function () {
+          var done = function () { b.dataset.copied = '1'; setTimeout(function () { delete b.dataset.copied; }, 1400); };
+          try { navigator.clipboard.writeText('--' + c.name).then(done, done); } catch (e) { done(); }
+        });
+        grid.appendChild(b);
+      });
+      var wrap = el('div'); wrap.appendChild(title); wrap.appendChild(grid); wrap.dataset.group = '1';
+      $('colors').appendChild(wrap);
+      swEls.push({ wrap: wrap, items: s.list, nodes: Array.prototype.slice.call(grid.children) });
+    });
+    var total = colors.length;
+    function filter(q) {
+      q = q.trim().toLowerCase(); var shown = 0;
+      swEls.forEach(function (s) {
+        var any = 0;
+        s.nodes.forEach(function (n, i) {
+          var c = s.items[i], hit = !q || c.name.indexOf(q) > -1 || (c.usage || '').toLowerCase().indexOf(q) > -1;
+          n.hidden = !hit; if (hit) any++;
+        });
+        s.wrap.hidden = !any; shown += any;
+      });
+      $('color-count').textContent = shown + ' av ' + total + ' färger';
+    }
+    ReactDOM.createRoot($('color-search')).render(h(D.TextField, { label: 'Sök färg', placeholder: 'T.ex. surface eller brand', startIcon: 'search', onChange: function (e) { filter(e.target.value); } }));
+    filter('');
+
+    /* Typography */
+    var tw = $('type');
+    t.type.groups.forEach(function (g) {
+      tw.appendChild(el('h3', 'content-heading-4 group', g.name));
+      tw.appendChild(table(['Stil', 'Exempel', 'Storlek', 'Radhöjd', 'Vikt', 'Användning'], g.styles.map(function (s) {
+        var ex = el('span', s.name, 'Rubrik och text'); ex.style.whiteSpace = 'nowrap';
+        return [code('.' + s.name), ex, s.fontSize, String(s.lineHeight), String(s.fontWeight), s.usage || ''];
+      })));
+    });
+
+    /* Sizes */
+    var sz = $('sizes');
+    var px = function (v) { return parseFloat(v); };
+    sz.appendChild(el('h3', 'content-heading-4 group', 'Mellanrum (spacing)'));
+    sz.appendChild(table(['Token', 'Värde', 'Visuellt'], t.spacing.tokens.filter(function (x) { return /^spacing-/.test(x.name); }).map(function (x) {
+      var b = el('div', 'bar'); b.style.width = 'var(--' + x.name + ')'; return [code(x.name), x.value, b];
+    })));
+    sz.appendChild(el('h3', 'content-heading-4 group', 'Padding'));
+    sz.appendChild(table(['Token', 'Värde', 'Visuellt'], t.spacing.tokens.filter(function (x) { return /^padding-/.test(x.name); }).map(function (x) {
+      var b = el('div', 'bar'); b.style.width = 'var(--' + x.name + ')'; return [code(x.name), x.value, b];
+    })));
+    sz.appendChild(el('h3', 'content-heading-4 group', 'Radier'));
+    sz.appendChild(table(['Token', 'Värde', 'Visuellt', 'Användning'], t.radius.tokens.map(function (x) {
+      var b = el('div', 'rad'); b.style.borderRadius = 'var(--' + x.name + ')'; return [code(x.name), x.value, b, x.usage || ''];
+    })));
+    sz.appendChild(el('h3', 'content-heading-4 group', 'Höjder, ikoner, konturer och spalter'));
+    sz.appendChild(table(['Token', 'Värde', 'Användning'], t.size.tokens.map(function (x) { return [code(x.name), x.value, x.usage || '']; })));
+  }).catch(function () {
+    $('colors').textContent = 'Kunde inte läsa tokens.json. Öppna sidan via en lokal server (npx serve .).';
+  });
+})();
+</script>
+</body>
+</html>
