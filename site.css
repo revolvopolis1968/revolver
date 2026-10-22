@@ -5,7 +5,7 @@ a { color: var(--font-link); }
 .skip { position: absolute; left: var(--spacing-xl); top: -100px; background: var(--surface-white); padding: var(--padding-xs) var(--padding-s); z-index: 10; }
 .skip:focus { top: var(--spacing-xl); }
 
-.wrap { max-width: 1120px; margin: 0 auto; padding: 0 var(--spacing-2xl); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .top { border-bottom: var(--stroke-1) solid var(--stroke-dark-15-pct); background: var(--surface-white); position: sticky; top: 0; z-index: 5; }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xl); height: 64px; }
 .top__brand { text-decoration: none; color: var(--font-high-emphasis-dark); }
